@@ -8,7 +8,6 @@ class GameState {
     public int maxScore;
     public String minTip;
 
-    // 0 for max and 1 for min
     public Turn turn;
 
     // board for the game
@@ -24,7 +23,6 @@ class GameState {
         // while the 2nd random position is too close to the first one,
         // generate a new one
 
-        System.out.println("xRandom: " + xRandom + " yRandom: " + yRandom);
         while (Math.abs(xRandom - xRandom2) < 2 && Math.abs(yRandom - yRandom2) < 2) {
             xRandom2 = (int) (Math.random() * xSize);
             yRandom2 = (int) (Math.random() * xSize);
@@ -59,12 +57,10 @@ class GameState {
         int yRandom2 = yRandom;
         // while the 2nd random position is too close to the first one,
         // generate a new one
-        System.out.println("xRandom: " + xRandom + " yRandom: " + yRandom);
         while (Math.abs(xRandom - xRandom2) < 2 && Math.abs(yRandom - yRandom2) < 2) {
             xRandom2 = (int) (Math.random() * xSize - 1);
             yRandom2 = (int) (Math.random() * xSize - 1);
         }
-        System.out.println("xRandom: " + xRandom2 + " yRandom: " + yRandom2);
         List<List<Character>> board = new ArrayList<>();
         for (int i = 0; i < xSize; i++) {
             List<Character> row = new ArrayList<>();
@@ -93,7 +89,7 @@ class GameState {
         turn = turn.next();
         Turn win = isBoardWin();
         if (win != null) {
-            GameController.printGame(this);
+            printBoard();
             if (win == Turn.MAX) {
                 maxWin();
             } else {
